@@ -32,7 +32,7 @@ const UserSignup = () => {
             required
             placeholder='Enter your password'
             className='bg-[#eeeeee] rounded-xl w-52 mb-6 px-3 py-2 placeholder:text-base border-2 border-[#eeeeee] focus:border-zinc-950 focus:outline-none' />
-
+<br/>
            <button className='bg-[#111] text-white font-semibold mb-3 rounded-lg px-4 py-2 w-80 text-lg placeholder:text-base'>
             Create account
             </button>
