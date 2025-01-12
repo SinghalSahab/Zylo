@@ -29,7 +29,7 @@ const CaptainLogin = () => {
           
         }} className='flex flex-col justify-start'>
 
-            <h3 className='text-3xl mb-3'>What's your email adress</h3>
+            <h3 className='text-3xl font-medium mb-3'>What's your email adress</h3>
             <input 
             required 
             value = {email}
@@ -39,7 +39,7 @@ const CaptainLogin = () => {
             type="email"
             className='bg-[#eeeeee] mb-5 rounded-xl text-lg placeholder:text-base px-4 py-2  w-80 border-2 border-[#eeeeee] focus:border-zinc-950 focus:outline-none '
              placeholder='Enter your email '/>
-            <h3 className='text-3xl mb-3'>Enter your password</h3>
+            <h3 className='text-3xl font-medium mb-3'>Enter your password</h3>
             <input
             required 
             value = {password}
