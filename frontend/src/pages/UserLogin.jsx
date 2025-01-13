@@ -56,7 +56,7 @@ const UserLogin = () => {
         </form>
         
         <div>
-          New here? <Link to='/users/register' className='text-blue-600  font-medium'>Create new account</Link>
+        <p className='text-center'>New here? <Link to='/users/register' className='text-blue-600  font-medium'>Create new account</Link></p>
         </div>
         </div>
         <div>
