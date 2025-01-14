@@ -1,30 +1,55 @@
-import React, { useState } from 'react'
+import React, { useState ,useContext} from 'react'
 import Logo from '../assets/Logo.png'
-import {Link} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { UserDataContext } from '../context/UserContext'
+
+
 
 const UserSignup = () => {
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [userData, setUserData] = useState({});
-  const submitHandler = (e) => {
-     e.preventDefault();
+  const [ email, setEmail ] = useState('')
+  const [ password, setPassword ] = useState('')
+  const [ firstName, setFirstName ] = useState('')
+  const [ lastName, setLastName ] = useState('')
+  const [ userData, setUserData ] = useState({})
 
-     setUserData({
-       username:{
-        firstname: firstname,
-       lastname: lastname,
-       },
-       email: email,
-       password: password
-     })
-     
-     
-     setFirstname('');
-     setLastname('');
-     setPassword('');
-     setEmail('');
+  const navigate = useNavigate()
+
+
+
+  const { user, setUser } = useContext(UserDataContext)
+
+
+
+
+  const submitHandler = async (e) => {
+    e.preventDefault()
+    const newUser = {
+      fullname: {
+        firstname: firstName,
+        lastname: lastName
+      },
+      email: email,
+      password: password
+    }
+    
+
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`, newUser);
+    
+    
+    if (response.status === 201) {
+      const data = response.data
+      setUser(data.user)
+      localStorage.setItem('token', data.token)
+      navigate('/home')
+    }
+
+
+    setEmail('')
+    setFirstName('')
+    setLastName('')
+    setPassword('')
+
   }
   return (
     <div className=''>
@@ -40,18 +65,18 @@ const UserSignup = () => {
             <div className='gap-2 flex mb-5'>
             <input
             required 
-            value={firstname}
+            value={firstName}
             onChange={(e)=>{
-              setFirstname(e.target.value)
+              setFirstName(e.target.value)
             }}
             type="text"
             className='bg-[#eeeeee] rounded-xl text-lg placeholder:text-base px-4 py-2 w-40 border-2 border-[#eeeeee] focus:border-zinc-950 focus:outline-none'
              placeholder='First name' />
              <input
             required 
-            value={lastname}
+            value={lastName}
             onChange={(e)=>{
-              setLastname(e.target.value)
+              setLastName(e.target.value)
             }}
             type="text"
             className='bg-[#eeeeee] rounded-xl text-lg placeholder:text-base px-4 py-2  w-40 border-2 border-[#eeeeee] focus:border-zinc-950 focus:outline-none'
