@@ -14,12 +14,7 @@ const UserSignup = () => {
   const [ userData, setUserData ] = useState({})
 
   const navigate = useNavigate()
-
-
-
-  const { user, setUser } = useContext(UserDataContext)
-
-
+const { user, setUser } = useContext(UserDataContext)
 
 
   const submitHandler = async (e) => {
