@@ -9,7 +9,7 @@ const UserLogout = () => {
     const logoutUser = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`${import.meta.env.VITE_URL}/users/logout`, {
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/users/logout`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
