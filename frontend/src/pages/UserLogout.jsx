@@ -20,12 +20,13 @@ const UserLogout = () => {
           navigate('/users/login');
         }
       } catch (error) {
-        console.error('Logout failed:', error);
+        console.error('Logout failed:', error.response ? error.response.data : error.message);
       }
+      
     };
 
     logoutUser();
-  }, [navigate]);
+  }, []);
 
   return <div>UserLogout</div>;
 };
