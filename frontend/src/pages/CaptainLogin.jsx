@@ -9,7 +9,7 @@ import axios from 'axios'
 const CaptainLogin = () => {
   const navigate = useNavigate()
   
-    const { captain, setCaptain } = React.useContext(CaptainDataContext)
+    const { captain , setCaptain } = React.useContext(CaptainDataContext)
 
     const [email,setEmail] = useState(''); 
   const [password,setPassword] = useState('');
