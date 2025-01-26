@@ -1,10 +1,32 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Logo from '../assets/Logo.png'
+import {useGSAP} from '@gsap/react'
+import gsap from 'gsap'
 
 const UserHome = () => {
-  const submithandler = () =>{
-
+     const [pickup, setPickup] = useState('')
+     const [destination, setDestination] = useState('')
+     const [panelOpen, setPanelOpen] = useState(false)
+     const PanelRef = useRef(null)
+  const submithandler = (e) =>{
+    e.preventDefault();
   }
+
+    useGSAP(() => {
+    
+      if(panelOpen){
+        gsap.to(PanelRef.current, {
+      height: '70%'
+        })
+      }
+      else{
+        gsap.to(PanelRef.current, {
+      height: '0%'
+        })
+      }
+    
+  }, [panelOpen])
+  
   return (
     <div className='h-screen relative'>
       <img src={Logo} className='w-16 absolute left-5 top-5' alt="" />
@@ -14,19 +36,31 @@ const UserHome = () => {
       </div>
       <div className=' flex flex-col justify-end h-screen absolute w-full top-0 '>
         <div className='h-[30%] bg-white p-5 relative'>
-        <h4 className='text-3xl font-semibold py-3'>Find a trip</h4>
+        <h4 className='text-3xl font-semibold py-2'>Find a trip</h4>
         <form onSubmit={(e) =>{
           submithandler(e)
         }}>
           <div className="line absolute top-[42%] h-14 left-9 w-1 bg-[#374151] rounded-full"></div>
-          <input className='bg-[#EEEEEE] text-lg rounded-lg px-12 py-2 w-full mb-3' type="text" placeholder='Add a pickup location'/>
-          <input className='bg-[#EEEEEE] text-lg rounded-lg px-12 py-2 w-full ' type="text" placeholder='Enter a drop location' />
+          <input 
+           value={pickup}
+           onChange={(e) => setPickup(e.target.value)}
+           onClick={() => setPanelOpen(true)}
+           className='bg-[#EEEEEE] text-lg rounded-lg px-12 py-2 w-full mb-3'
+            type="text"
+             placeholder='Add a pickup location'/>
+          <input
+          value={destination}
+          onChange={(e) => setDestination(e.target.value)}
+          onClick={() => setPanelOpen(true)}
+          className='bg-[#EEEEEE] text-lg rounded-lg px-12 py-2 w-full '
+           type="text"
+           placeholder='Enter a drop location' />
         </form>
         <button className='bg-black text-white  w-full py-2 px-2 mt-6 rounded-lg mb-1 font-semibold'>
           Find Trip
         </button>
         </div>
-        <div className='h-[70%] bg-red-500 p-5 hidden'>
+        <div ref={PanelRef} className=' bg-red-500  '>
 
         </div>
       </div>
