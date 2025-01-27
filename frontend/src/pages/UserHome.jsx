@@ -2,12 +2,14 @@ import React, { useEffect, useRef, useState } from 'react'
 import Logo from '../assets/Logo.png'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const UserHome = () => {
      const [pickup, setPickup] = useState('')
      const [destination, setDestination] = useState('')
      const [panelOpen, setPanelOpen] = useState(false)
      const PanelRef = useRef(null)
+     const PanelCloseRef = useRef(null)
   const submithandler = (e) =>{
     e.preventDefault();
   }
@@ -16,13 +18,21 @@ const UserHome = () => {
     
       if(panelOpen){
         gsap.to(PanelRef.current, {
-      height: '70%'
+      height: '70%',
+      padding:24
         })
+        gsap.to(PanelCloseRef.current, {
+          opacity: 1
+      })
       }
       else{
         gsap.to(PanelRef.current, {
-      height: '0%'
+      height: '0%',
+      padding: 0
         })
+        gsap.to(PanelCloseRef.current, {
+          opacity: 0
+      })
       }
     
   }, [panelOpen])
@@ -36,11 +46,17 @@ const UserHome = () => {
       </div>
       <div className=' flex flex-col justify-end h-screen absolute w-full top-0 '>
         <div className='h-[30%] bg-white p-5 relative'>
+          <h5 
+          className='absolute right-7 top-3' 
+          ref={PanelCloseRef}
+          onClick={() => {setPanelOpen(false)}} >
+            <KeyboardArrowDownIcon />
+          </h5>
         <h4 className='text-3xl font-semibold py-2'>Find a trip</h4>
         <form onSubmit={(e) =>{
           submithandler(e)
         }}>
-          <div className="line absolute top-[42%] h-14 left-9 w-1 bg-[#374151] rounded-full"></div>
+          <div className="line absolute top-[38%] h-16 left-9 w-1 bg-[#374151] rounded-full"></div>
           <input 
            value={pickup}
            onChange={(e) => setPickup(e.target.value)}
