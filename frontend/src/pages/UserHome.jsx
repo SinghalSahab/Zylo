@@ -3,6 +3,7 @@ import Logo from '../assets/Logo.png'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import LocationPanel from '../components/LocationPanel';
 
 const UserHome = () => {
      const [pickup, setPickup] = useState('')
@@ -38,7 +39,7 @@ const UserHome = () => {
   }, [panelOpen])
   
   return (
-    <div className='h-screen relative'>
+    <div className='h-screen relative overflow-hidden'>
       <img src={Logo} className='w-16 absolute left-5 top-5' alt="" />
 
       <div className='h-screen w-screen'>
@@ -76,9 +77,12 @@ const UserHome = () => {
           Find Trip
         </button>
         </div>
-        <div ref={PanelRef} className=' bg-red-500  '>
-
+        <div ref={PanelRef} className=' bg-white '>
+            <LocationPanel />
         </div>
+      </div>
+      <div className='fixed z-10 bottom-0'>
+         <img src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_368,w_552/v1712027307/assets/42/eb85c3-e2dc-4e95-a70d-22ee4f08015f/original/Screenshot-2024-04-01-at-9.08.07p.m..png" alt="" />
       </div>
     </div>
   )
