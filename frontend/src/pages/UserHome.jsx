@@ -4,6 +4,8 @@ import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import LocationPanel from '../components/LocationPanel';
+import { VehicleCard } from '../components/VehicleCard';
+import PersonIcon from '@mui/icons-material/Person';
 
 const UserHome = () => {
      const [pickup, setPickup] = useState('')
@@ -38,6 +40,11 @@ const UserHome = () => {
     
   }, [panelOpen])
   
+  const [isClicked, setIsClicked] = useState(false);
+  
+    const handleClick = () => {
+      setIsClicked(!isClicked);
+    };
   return (
     <div className='h-screen relative overflow-hidden'>
       <img src={Logo} className='w-16 absolute left-5 top-5' alt="" />
@@ -81,9 +88,24 @@ const UserHome = () => {
             <LocationPanel />
         </div>
       </div>
-      <div className='fixed z-10 bottom-0'>
-         <img src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_368,w_552/v1712027307/assets/42/eb85c3-e2dc-4e95-a70d-22ee4f08015f/original/Screenshot-2024-04-01-at-9.08.07p.m..png" alt="" />
+       
+      <div className='z-10 w-full fixed px-3 py-6'>
+        <h3>lknvdssd</h3>
+      <div onClick={handleClick}   className={`p-4 flex gap-2 transition-all duration-300  fixed z-10 bottom-10 left-10  border-4 bg-white shadow-lg rounded-xl ${isClicked ? 'border border-gray-900 rounded-lg' : 'border-white'}`}>
+        <div className='w-[30%] flex  items-center'>
+          <img className="w-full h-20 object-cover" src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_368,w_552/v1712027307/assets/42/eb85c3-e2dc-4e95-a70d-22ee4f08015f/original/Screenshot-2024-04-01-at-9.08.07p.m..png" alt="" />
+        </div>
+        <div className=' w-1/2'>
+          <h3 className="font-bold text-lg">Zylo Go <span className=''><PersonIcon />4</span></h3>
+          <h4 className='font-medium text-gray-600'>2 mins away</h4>
+          <p className='text-gray-600'>Affordable ,compact rides</p>
+        </div>
+        <div className='w-[20%]'>
+          <p className="text-xl font-semibold">₹69.69</p>
+        </div>
       </div>
+    </div>
+     
     </div>
   )
 }
