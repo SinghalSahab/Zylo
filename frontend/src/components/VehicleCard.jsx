@@ -9,16 +9,16 @@ export const VehicleCard = (props) => {
   };
 
   return (
-    <div onClick={handleClick} className={`p-4 flex justify-between gap-2 transition-all duration-300 border-4 bg-white shadow-lg rounded-xl ${isClicked ? 'border-gray-900' : 'border-white'}`}>
-      <div className='w-[30%] flex items-center'>
+    <div onClick={handleClick} className={`p-4 flex flex-col md:flex-row justify-between gap-2 transition-all duration-300 border-4 bg-white shadow-lg rounded-xl ${isClicked ? 'border-gray-900' : 'border-white'}`}>
+      <div className='w-full md:w-[30%] flex items-center'>
         <img className="w-full h-20 object-cover" src={props.img} alt="" />
       </div>
-      <div className='w-1/2'>
+      <div className='w-full md:w-1/2'>
         <h3 className="font-bold text-lg">{props.name}<span className=''><PersonIcon />{props.capacity}</span></h3>
         <h4 className='font-medium text-gray-600'>{props.time}</h4>
         <p className='text-gray-600'>{props.description}</p>
       </div>
-      <div className='w-[20%]'>
+      <div className='w-full md:w-[20%]'>
         <p className="text-xl font-semibold">{props.price}</p>
       </div>
     </div>
