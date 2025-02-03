@@ -5,16 +5,18 @@ import gsap from 'gsap'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import LocationPanel from '../components/LocationPanel';
 import { VehicleCard } from '../components/VehicleCard';
-import PersonIcon from '@mui/icons-material/Person';
+import ConfirmRide from '../components/ConfirmRide';
 
 const UserHome = () => {
      const [pickup, setPickup] = useState('')
      const [destination, setDestination] = useState('')
      const [panelOpen, setPanelOpen] = useState(false)
      const [vehiclePanelOpen, setvehiclePanelOpen] = useState(false);
+     const [confirmRidePanel,setConfirmRidePanel] = useState(false);
      const PanelRef = useRef(null)
      const PanelCloseRef = useRef(null)
      const vehiclePanelRef = useRef(null)
+     const confirmRidePanelRef = useRef(null)
   const submithandler = (e) =>{
     e.preventDefault();
   }
@@ -54,6 +56,18 @@ const UserHome = () => {
     })
   }
   },[vehiclePanelOpen])
+
+  useGSAP(function () {
+    if (confirmRidePanel) {
+        gsap.to(confirmRidePanelRef.current, {
+            transform: 'translateY(0)'
+        })
+    } else {
+        gsap.to(confirmRidePanelRef.current, {
+            transform: 'translateY(100%)'
+        })
+    }
+}, [ confirmRidePanel ])
  
   return (
     <div className='h-screen relative overflow-hidden'>
@@ -105,13 +119,15 @@ const UserHome = () => {
       <div ref={vehiclePanelRef} className='z-10 w-full  flex flex-col fixed px-3 py-6 translate-y-full bg-white top-[38%] space-y-4'>
         <div className=''>
         <h1 className='text-xl font-semibold'>Choose A Ride</h1>
-        <h5 
-          className='absolute right-7 top-3' 
+        <h2 
+          className=' text-3xl absolute right-7 top-5' 
           onClick={() => {setvehiclePanelOpen(false)}} >
             <KeyboardArrowDownIcon />
-          </h5>
+          </h2>
         </div>
-        <div className='flex flex-col gap-4'>
+        <div onClick={() => {
+          setConfirmRidePanel(true);
+        }} className='flex flex-col gap-4'>
           <VehicleCard
             img="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_368,w_552/v1712027307/assets/42/eb85c3-e2dc-4e95-a70d-22ee4f08015f/original/Screenshot-2024-04-01-at-9.08.07p.m..png"
             name="Zylo Go"
@@ -138,6 +154,19 @@ const UserHome = () => {
           />
         </div>
      </div>
+
+
+     <div ref={confirmRidePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-6 pt-12'>
+                <ConfirmRide
+                    // createRide={createRide}
+                    // pickup={pickup}
+                    // destination={destination}
+                    // fare={fare}
+                    // vehicleType={vehicleType}
+
+                    setConfirmRidePanel={setConfirmRidePanel} //setVehicleFound={setVehicleFound}
+                     />
+            </div>
      
     </div>
   )
