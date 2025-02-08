@@ -6,6 +6,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import LocationPanel from '../components/LocationPanel';
 import { VehicleCard } from '../components/VehicleCard';
 import ConfirmRide from '../components/ConfirmRide';
+import LookingForDriver from '../components/LookingForDriver';
 
 const UserHome = () => {
      const [pickup, setPickup] = useState('')
@@ -13,11 +14,13 @@ const UserHome = () => {
      const [panelOpen, setPanelOpen] = useState(false)
      const [vehiclePanelOpen, setvehiclePanelOpen] = useState(false);
      const [confirmRidePanel,setConfirmRidePanel] = useState(false);
+     const [VehicleFound,setVehicleFound] = useState(false);
      const [vehicle,setVehicle] = useState(null);
      const PanelRef = useRef(null)
      const PanelCloseRef = useRef(null)
      const vehiclePanelRef = useRef(null)
      const confirmRidePanelRef = useRef(null)
+     const VehicleFoundRef = useRef(null)
 
      
      
@@ -72,6 +75,19 @@ const UserHome = () => {
         })
     }
 }, [ confirmRidePanel ])
+
+useGSAP(function () {
+  if (VehicleFound) {
+      gsap.to(VehicleFoundRef.current, {
+          transform: 'translateY(0)'
+          
+      })
+  } else {
+      gsap.to(VehicleFoundRef.current, {
+          transform: 'translateY(100%)'
+      })
+  }
+}, [ VehicleFound ])
  
   return (
     <div className='h-screen relative overflow-hidden'>
@@ -174,8 +190,12 @@ const UserHome = () => {
                     // fare={fare}
                     // vehicleType={vehicleType}
 
-                    setConfirmRidePanel={setConfirmRidePanel} rideType = {vehicle} //setVehicleFound={setVehicleFound}
+                    setConfirmRidePanel={setConfirmRidePanel} rideType = {vehicle} setVehicleFound={setVehicleFound}
                      />
+            </div>
+
+            <div ref={VehicleFoundRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-6 pt-12'>
+                <LookingForDriver rideType = {vehicle} setVehicleFound={setVehicleFound} /> 
             </div>
      
     </div>

@@ -65,7 +65,7 @@ const ConfirmRide = (props) => {
                        </div>
                      </div>
 
-                     <button className='w-full bg-[#0DB361] py-3 rounded-full font-semibold text-xl text-white'>Confirm</button>
+                     <button onClick={() =>{props.setVehicleFound(true)}} className='w-full bg-[#0DB361] py-3 rounded-full font-semibold text-xl text-white'>Confirm</button>
                 </div>
                 
             </div>
