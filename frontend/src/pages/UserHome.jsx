@@ -13,10 +13,14 @@ const UserHome = () => {
      const [panelOpen, setPanelOpen] = useState(false)
      const [vehiclePanelOpen, setvehiclePanelOpen] = useState(false);
      const [confirmRidePanel,setConfirmRidePanel] = useState(false);
+     const [vehicle,setVehicle] = useState(null);
      const PanelRef = useRef(null)
      const PanelCloseRef = useRef(null)
      const vehiclePanelRef = useRef(null)
      const confirmRidePanelRef = useRef(null)
+
+     
+     
   const submithandler = (e) =>{
     e.preventDefault();
   }
@@ -135,6 +139,8 @@ const UserHome = () => {
             time="2 mins away"
             description="Affordable, compact rides"
             price="₹69.69"
+            vehicle = {vehicle}
+            setVehicle = {setVehicle}
           />
           <VehicleCard
             img="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_368,w_552/v1648431773/assets/1d/db8c56-0204-4ce4-81ce-56a11a07fe98/original/Uber_Auto_558x372_pixels_Desktop.png"
@@ -143,6 +149,8 @@ const UserHome = () => {
             time="5 mins away"
             description="Affordable auto rides"
             price="₹49.49"
+            vehicle = {vehicle}
+            setVehicle = {setVehicle}
           />
           <VehicleCard
             img="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_368,w_552/v1648177797/assets/fc/ddecaa-2eee-48fe-87f0-614aa7cee7d3/original/Uber_Moto_312x208_pixels_Mobile.png"
@@ -151,6 +159,8 @@ const UserHome = () => {
             time="3 mins away"
             description="Quick motorcycle rides"
             price="₹39.39"
+            vehicle = {vehicle}
+            setVehicle = {setVehicle}
           />
         </div>
      </div>
@@ -164,7 +174,7 @@ const UserHome = () => {
                     // fare={fare}
                     // vehicleType={vehicleType}
 
-                    setConfirmRidePanel={setConfirmRidePanel} //setVehicleFound={setVehicleFound}
+                    setConfirmRidePanel={setConfirmRidePanel} rideType = {vehicle} //setVehicleFound={setVehicleFound}
                      />
             </div>
      
