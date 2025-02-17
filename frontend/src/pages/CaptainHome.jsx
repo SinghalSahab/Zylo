@@ -1,11 +1,46 @@
-import React from 'react'
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import React, { useRef, useState } from 'react'
+
 import { Link } from'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Logo from '../assets/Logo.png'
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
+
+import CaptainDetails from '../components/CaptainDetails';
+import RidePopup from '../components/RidePopup';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import ConfirmRidePopup from '../components/ConfirmRidePopup';
 
 const CaptainHome = () => {
+
+   const [RidePopupPanel, setRidePopupPanel] = useState(true)
+   const [ConfirmRidePopupPanel, setConfirmRidePopupPanel] = useState(false)
+   const RidePopupPanelRef = useRef(null)
+   const ConfirmRidePopupPanelRef = useRef(null)
+
+
+   useGSAP(function () {
+    if (RidePopupPanel) {
+        gsap.to(RidePopupPanelRef.current, {
+            transform: 'translateY(0)'
+        })
+    } else {
+        gsap.to(RidePopupPanelRef.current, {
+            transform: 'translateY(100%)'
+        })
+    }
+}, [ RidePopupPanel])
+
+useGSAP(function () {
+  if (ConfirmRidePopupPanel) {
+      gsap.to(ConfirmRidePopupPanelRef.current, {
+          transform: 'translateY(0)'
+      })
+  } else {
+      gsap.to(ConfirmRidePopupPanelRef.current, {
+          transform: 'translateY(100%)'
+      })
+  }
+}, [ ConfirmRidePopupPanel])
   return (
     <div className='h-screen w-full'>
     <div className='fixed p-3 top-0 flex items-center justify-between w-screen'>
@@ -20,46 +55,15 @@ const CaptainHome = () => {
 
     </div>
     <div className='h-2/5 p-4'>
-         <div className='flex items-center justify-between py-4'>
-          <div className='flex items-center gap-4'>
-             <img className='rounded-full w-16 h-16 object-cover' src="https://sb.kaleidousercontent.com/67418/1920x1281/0e9f02a048/christian-buehner-ditylc26zvi-unsplash.jpg" alt="" />
+         <CaptainDetails />
+    </div>
 
-             <div>
-              <h4 className = 'text-xl font-semibold'>Mike Ross</h4>
-              <p className='txt-sm text-gray-600'>Senior Partner</p>
-             </div>
-          </div>
-          <div className=''>
-           
-            <p className = 'text-xl font-semibold'> ₹6969</p>
-            <p className=' txt-sm text-gray-600'>Earned</p>
-          </div>
+    <div ref={RidePopupPanelRef} className='fixed w-full z-10 translate-y-full bottom-0 bg-white px-3 py-6 pt-12'>
+         <RidePopup setRidePopupPanel = {setRidePopupPanel} setConfirmRidePopupPanel={setConfirmRidePopupPanel}/>       
+    </div>
 
-          </div>
- 
-         <div>
-          <div className='flex justify-between gap-4 bg-gray-100 py-8 px-4 rounded-lg items-start'>
-            <div className='flex flex-col items-center'>
-            <h5 className='text-3xl'>
-              <AccountBalanceWalletIcon fontSize='large' />
-            </h5>
-            <h4 className='font-medium text-lg'>₹69.69</h4>
-            <p className=' text-md text-gray-600'>View all your Earnings</p>
-            </div>
-
-            <div className='flex flex-col items-center'>
-              <AccessTimeIcon fontSize='large'/>
-              <h4 className='font-medium text-lg'>Total riding time</h4>
-              <p className=' text-md text-gray-600'>View all your Trips</p>
-            </div>
-
-            <div className='flex flex-col items-center'>
-            <AccountBalanceWalletIcon fontSize='large'/>
-            <h4 className='font-medium text-lg'>₹69.69</h4>
-            <p className=' text-md text-gray-600'>View all your Earnings</p>
-            </div>
-          </div>
-         </div>
+    <div ref={ConfirmRidePopupPanelRef} className='fixed w-full z-10 translate-y-full h-screen bottom-0 bg-white px-3 py-6 pt-12'>
+         <ConfirmRidePopup setRidePopupPanel = {setRidePopupPanel} setConfirmRidePopupPanel={setConfirmRidePopupPanel}/>       
     </div>
 </div>
   )

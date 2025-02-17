@@ -1,6 +1,6 @@
 import React from 'react'
 import {Routes , Route} from 'react-router-dom'
-import {CaptainLogin, CaptainSignup, Start, UserLogin, UserSignup , UserHome, UserProtectedWrapper, UserLogout, CaptainProtectedWrapper, CaptainHome, CaptainLogout, Riding} from './pages'
+import {CaptainLogin, CaptainSignup, Start, UserLogin, UserSignup , UserHome, UserProtectedWrapper, UserLogout,CaptainRiding, CaptainProtectedWrapper, CaptainHome, CaptainLogout, Riding} from './pages'
 
 const App = () => {
   return (
@@ -16,6 +16,7 @@ const App = () => {
         <Route path='/captains/home' element={<CaptainProtectedWrapper><CaptainHome /></CaptainProtectedWrapper>} />
         <Route path='/captains/logout' element={<CaptainProtectedWrapper><CaptainLogout /> </CaptainProtectedWrapper> } />
         <Route path='/users/riding' element={<Riding />} />
+        <Route path='/captains/riding' element={<CaptainRiding />} />
       </Routes>
     </div>
   )

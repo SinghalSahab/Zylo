@@ -10,3 +10,4 @@ export { default as CaptainProtectedWrapper } from './CaptainProtectedWrapper';
 export { default as CaptainLogout } from './CaptainLogout';
 export {default as CaptainHome} from './CaptainHome';
 export {default as Riding} from './Riding';
+export {default as CaptainRiding} from './CaptainRiding';
