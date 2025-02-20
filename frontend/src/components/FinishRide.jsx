@@ -1,21 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PlaceIcon from '@mui/icons-material/Place';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import SquareIcon from '@mui/icons-material/Square';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import { Link } from 'react-router-dom';
-const ConfirmRidePopup = (props) => {
-    const [otp,setOTP] = useState('');
-    const submitHandler = (e) => {
-        e.preventDefault();
-        
-    }
+
+const FinishRide = (props) => {
   return (
-        <div className=''>
+    <div className=''>
             <h5 className='p-1 text-center w-[93%] absolute top-1' onClick={() => {
-                props.setConfirmRidePopupPanel(false)
+                props.setFinishedRidePanel(false)
             }}><KeyboardArrowDownIcon /></h5>
-            <h3 className='text-2xl font-semibold mb-5'>Confirm this ride to start</h3>
+            <h3 className='text-2xl font-semibold mb-5'>Finish this ride</h3>
 
             <div className='flex items-center gap-4'>
             <img className='rounded-full w-16 h-16 object-cover' src="https://sb.kaleidousercontent.com/67418/1920x1281/0e9f02a048/christian-buehner-ditylc26zvi-unsplash.jpg" alt="" />
@@ -60,18 +56,11 @@ const ConfirmRidePopup = (props) => {
                      </div>
 
                      <div className='mt-6'>
-                     <form onSubmit={(e) => {
-                        submitHandler(e);
-                        }}>
-                            <input value={otp} onChange={(e) => {
-                                setOTP(e.target.value)
-                            }} className='w-full px-6 py-4 font-mono text-lg rounded-lg mb-3 bg-[#eee]' type="text" placeholder='Enter OTP' />
-                     <Link to='/captains/riding' className='w-full bg-[#0DB361] py-3 rounded-full font-semibold text-xl text-white flex justify-center mb-2'>Confirm</Link>
-                     <button onClick={() =>{
-                        props.setConfirmRidePopupPanel(false)
-                        props.setRidePopupPanel(false)
-                     }} className='w-full bg-red-600 py-3 rounded-full font-semibold text-xl text-white'>Cancel</button>
-                     </form>
+                     
+                     <Link to='/captains/home' className='w-full bg-[#0DB361] py-3 rounded-xl font-semibold text-xl text-white flex justify-center mb-2'>Finish Ride</Link>
+
+                     <p className='text-red-500 mt-6 text-sm'>CLick on finish ride button if you have completed the payment</p>
+                     
                      </div>
                 </div>
                 
@@ -81,4 +70,4 @@ const ConfirmRidePopup = (props) => {
   )
 }
 
-export default ConfirmRidePopup
+export default FinishRide
